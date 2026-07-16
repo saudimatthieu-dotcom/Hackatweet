@@ -30,7 +30,7 @@ function Home() {
     fetch('http://localhost:3000/tweets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: user.token, content: tweet }),
+      body: JSON.stringify({ token: user.token, message: tweet }),
     }).then(response => response.json())
       .then(data => {
         if (data.result) {
@@ -86,3 +86,5 @@ function Home() {
 }
 
 export default Home;
+
+
