@@ -19,6 +19,7 @@ function SignUp(props) {
       body: JSON.stringify({ firstname: signUpFirstname, username: signUpUsername, password: signUpPassword }),
     }).then(response => response.json())
       .then(data => {
+        console.log(data)
         if (data.result) {
           dispatch(login({ firstname: signUpFirstname, username: signUpUsername, token: data.token }));
           props.handleClose();

@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { logout } from '../reducers/user';
+import LastTweets from './LastTweets';
 
 function Home() {
   const router = useRouter();
   const user = useSelector((state) => state.user.value);
   const [tweet, setTweet] = useState('');
   const dispatch = useDispatch();
+  const [tweets, setTweets] = useState([]);
+  
 
   useEffect(() => {
     if (!user.token) {
@@ -35,7 +38,7 @@ function Home() {
       .then(data => {
         if (data.result) {
           setTweet('');
-          // waiting lastTweet.js 
+          setTweets([{ username: user.username, message: tweet, date: Date, likes: [] }, ...tweets]);
         }
       });
   };
@@ -75,6 +78,7 @@ function Home() {
             <button className={styles.tweetButton} onClick={() => handleTweet()}>Tweet</button>
           </div>
         </div>
+        <LastTweets tweets={tweets} />
       </div>
 
       <div className={styles.rightSection}>
