@@ -11,6 +11,8 @@ router.post("/", (req, res) => {
       message: req.body.message,
       hashtags: req.body.hashtags,
       username: req.body.username,
+      date: new Date(),
+      likes: [],
     });
 
     newTweet.save().then((data) => {
