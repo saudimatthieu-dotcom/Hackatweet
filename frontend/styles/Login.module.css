@@ -1,0 +1,72 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  background-color: #4d9feb;
+  background-image: url('/background.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.bigLogo {
+  width: 50%;
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 60%;
+  padding-left: 5%;
+  background-color: #15202b;
+  color: #ffffff;
+}
+
+.smallLogo {
+  width: 60px;
+  transform: scaleX(-1);
+  margin-bottom: 30px;
+}
+
+.title {
+  font-family: 'Mont-Heavy', Verdana, sans-serif;
+  font-size: 60px;
+  margin: 0 0 30px 0;
+}
+
+.subtitle {
+  font-size: 22px;
+  margin: 0 0 20px 0;
+}
+
+.signupButton {
+  padding: 10px 40px;
+  border: none;
+  border-radius: 30px;
+  background-color: #4d9feb;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.question {
+  font-weight: bold;
+  margin: 25px 0 10px 0;
+}
+
+.signinButton {
+  padding: 10px 40px;
+  border: 1px solid #536471;
+  border-radius: 30px;
+  background-color: transparent;
+  color: #4d9feb;
+  font-weight: bold;
+  cursor: pointer;
+}
