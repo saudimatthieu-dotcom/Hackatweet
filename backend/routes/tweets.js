@@ -2,6 +2,15 @@ var express = require("express");
 var router = express.Router();
 
 const Tweet = require("../models/tweets");
+const User = require("../models/users");
+
+router.get("/", (req, res) => {
+  Tweet.find()
+    .sort({ date: -1 })
+    .then((data) => {
+      res.json({ result: true, tweets: data });
+    });
+});
 
 router.post("/", (req, res) => {
   if (req.body.message.length > 280) {
@@ -22,14 +31,23 @@ router.post("/", (req, res) => {
   }
 });
 
-
-router.get("/", (req, res) => {
-  Tweet.find()
-    .sort({ date: -1 })
-    .then((data) => {
-      res.json({ result: true, tweets: data });
-    });
+router.post("/like", (req, res) => {
+  Tweet.updateOne(
+    { username: req.body.username },
+    { likes: [...likes, username] },
+  ).then((data) => {
+    if (data) {
+      res.json({ result: true });
+    } else {
+      res.json({ result: false });
+    }
+  });
 });
 
+router.post("/delete", (req, res) => {
+  Tweet.deleteOne({ username: req.body.username }).then(
+    res.json({ result: true }),
+  );
+});
 
 module.exports = router;
