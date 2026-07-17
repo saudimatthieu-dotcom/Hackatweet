@@ -16,8 +16,17 @@ function Home() {
   useEffect(() => {
     if (!user.token) {
       router.push('/');
+      return;
     }
+    fetch('http://localhost:3000/tweets')
+      .then(response => response.json())
+      .then(data => {
+        if (data.result) {
+          setTweets(data.tweets);
+        }
+      });
   }, []);
+
 
   const handleChange = (e) => {
     if (e.target.value.length <= 280) {
@@ -33,12 +42,12 @@ function Home() {
     fetch('http://localhost:3000/tweets', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: user.token, message: tweet }),
+      body: JSON.stringify({ token: user.token, message: tweet, username: user.username }),
     }).then(response => response.json())
       .then(data => {
         if (data.result) {
           setTweet('');
-          setTweets([{ username: user.username, message: tweet, date: Date, likes: [] }, ...tweets]);
+          setTweets([{ username: user.username, message: tweet, date: new Date(), likes: [] }, ...tweets]);
         }
       });
   };

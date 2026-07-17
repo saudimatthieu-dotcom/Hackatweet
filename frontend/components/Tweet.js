@@ -5,7 +5,7 @@ function Tweet(props) {
     <div className={styles.tweetCard}>
       <div className={styles.tweetHeader}>
         <span className={styles.name}>{props.username}</span>
-        <span className={styles.handle}>@{props.username} · {props.date}</span>
+        <span className={styles.handle}>@{props.username} · {new Date(props.date).toLocaleString()}</span>
       </div>
       <p className={styles.content}>{props.message}</p>
       <div className={styles.tweetFooter}>
