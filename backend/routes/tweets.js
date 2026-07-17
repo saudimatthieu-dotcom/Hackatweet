@@ -24,7 +24,6 @@ router.post("/", (req, res) => {
       likes: [],
     });
 
-
     newTweet.save().then((data) => {
       res.json({ result: true });
     });
@@ -33,8 +32,8 @@ router.post("/", (req, res) => {
 
 router.post("/like", (req, res) => {
   Tweet.updateOne(
-    { username: req.body.username },
-    { likes: [...likes, username] },
+    { _id: req.body.id },
+    { likes: [...likes, req.body.username] },
   ).then((data) => {
     if (data) {
       res.json({ result: true });
@@ -45,9 +44,7 @@ router.post("/like", (req, res) => {
 });
 
 router.post("/delete", (req, res) => {
-  Tweet.deleteOne({ username: req.body.username }).then(
-    res.json({ result: true }),
-  );
+  Tweet.deleteOne({ _id: req.body.id }).then(res.json({ result: true }));
 });
 
 module.exports = router;
