@@ -24,6 +24,7 @@ router.post("/", (req, res) => {
       likes: [],
     });
 
+
     newTweet.save().then((data) => {
       res.json({ result: true });
     });

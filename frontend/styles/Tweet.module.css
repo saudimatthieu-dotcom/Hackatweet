@@ -1,0 +1,36 @@
+.tweetCard {
+  padding: 20px;
+  border-bottom: 1px solid #2f3336;
+}
+
+.tweetHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.handle {
+  color: #8899a6;
+}
+
+.content {
+  margin: 12px 0;
+}
+
+.tweetFooter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.like {
+  cursor: pointer;
+}
+
+.likeCount {
+  color: #8899a6;
+}
