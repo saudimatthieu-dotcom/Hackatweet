@@ -13,11 +13,7 @@ function Home() {
   const [tweets, setTweets] = useState([]);
   
 
-  useEffect(() => {
-    if (!user.token) {
-      router.push('/');
-      return;
-    }
+  const loadTweets = () => {
     fetch('http://localhost:3000/tweets')
       .then(response => response.json())
       .then(data => {
@@ -25,6 +21,14 @@ function Home() {
           setTweets(data.tweets);
         }
       });
+  };
+
+  useEffect(() => {
+    if (!user.token) {
+      router.push('/');
+      return;
+    }
+    loadTweets();
   }, []);
 
 
@@ -47,7 +51,7 @@ function Home() {
       .then(data => {
         if (data.result) {
           setTweet('');
-          setTweets([{ username: user.username, message: tweet, date: new Date(), likes: [] }, ...tweets]);
+          loadTweets();
         }
       });
   };
@@ -56,7 +60,8 @@ function Home() {
     dispatch(logout());
     router.push('/');
   };
-
+  
+  
   return (
     <div className={styles.container}>
 
@@ -87,7 +92,7 @@ function Home() {
             <button className={styles.tweetButton} onClick={() => handleTweet()}>Tweet</button>
           </div>
         </div>
-        <LastTweets tweets={tweets} />
+        <LastTweets tweets={tweets} refreshTweets={loadTweets} />
       </div>
 
       <div className={styles.rightSection}>
