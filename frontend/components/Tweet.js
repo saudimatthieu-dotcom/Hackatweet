@@ -11,7 +11,7 @@ function Tweet(props) {
 
     const handleLike = () => {
       fetch('http://localhost:3000/tweets/like', {
-        method: 'POST',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ _id: props._id, username: user.username }),
       }).then(response => response.json())
@@ -24,7 +24,7 @@ function Tweet(props) {
 
     const handleDelete = () => {
       fetch('http://localhost:3000/tweets/delete', {
-        method: 'POST',
+        method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ _id: props._id, token: user.token }),
       }).then(response => response.json())
@@ -43,8 +43,8 @@ function Tweet(props) {
       </div>
       <p className={styles.content}>{props.message}</p>
       <div className={styles.tweetFooter}>
-        <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} style={{ color: isLiked ? 'red' : '#71767B' }} />
-        {props.username === user.username && <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete()} style={{ color: '#71767B' }} />}
+        <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} style={{ color: isLiked ? 'red' : '#71767B', cursor: 'pointer' }} />
+        {props.username === user.username && <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete()} style={{ color: '#71767B', cursor: 'pointer' }} />}
 
         <span className={styles.likeCount}>{props.likes.length}</span>
       </div>

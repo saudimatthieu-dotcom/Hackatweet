@@ -30,21 +30,23 @@ router.post("/", (req, res) => {
   }
 });
 
-router.post("/like", (req, res) => {
-  Tweet.updateOne(
-    { _id: req.body.id },
-    { likes: [...likes, req.body.username] },
-  ).then((data) => {
-    if (data) {
-      res.json({ result: true });
-    } else {
-      res.json({ result: false });
+router.put("/like", (req, res) => {
+  Tweet.findById(req.body._id).then((tweet) => {
+    if (!tweet) {
+      res.json({ result: false, error: "Tweet not found" });
+      return;
     }
+    const update = tweet.likes.includes(req.body.username)
+      ? { $pull: { likes: req.body.username } }
+      : { $push: { likes: req.body.username } };
+    Tweet.updateOne({ _id: req.body._id }, update).then(() => {
+      res.json({ result: true });
+    });
   });
 });
 
-router.post("/delete", (req, res) => {
-  Tweet.deleteOne({ _id: req.body.id }).then(res.json({ result: true }));
+router.delete("/delete", (req, res) => {
+  Tweet.deleteOne({ _id: req.body._id }).then(() => res.json({ result: true }));
 });
 
 module.exports = router;
