@@ -15,10 +15,21 @@ router.post("/", (req, res) => {
       likes: [],
     });
 
+
     newTweet.save().then((data) => {
       res.json({ result: true });
     });
   }
 });
+
+
+router.get("/", (req, res) => {
+  Tweet.find()
+    .sort({ date: -1 })
+    .then((data) => {
+      res.json({ result: true, tweets: data });
+    });
+});
+
 
 module.exports = router;
