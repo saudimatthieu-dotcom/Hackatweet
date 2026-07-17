@@ -1,0 +1,16 @@
+.trend {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 0;
+  border-bottom: 1px solid #2f3336;
+}
+
+.hashtag {
+  font-weight: bold;
+}
+
+.count {
+  color: #8899a6;
+  font-size: 14px;
+}

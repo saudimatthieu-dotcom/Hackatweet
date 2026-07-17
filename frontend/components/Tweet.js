@@ -34,14 +34,19 @@ function Tweet(props) {
           }
         });
     };
-
+    const formattedMessage = props.message.split(' ').map((word, i) => {
+      if (word.startsWith('#') && word.length > 1) {
+        return <span key={i} style={{ color: '#1D9BF0', fontWeight: 'bold' }}>{word} </span>;
+      }
+      return word + ' ';
+    });
   return (
     <div className={styles.tweetCard}>
       <div className={styles.tweetHeader}>
         <span className={styles.name}>{props.username}</span>
         <span className={styles.handle}>@{props.username} · {moment(props.date).fromNow()}</span>
       </div>
-      <p className={styles.content}>{props.message}</p>
+      <p className={styles.content}>{formattedMessage}</p>
       <div className={styles.tweetFooter}>
         <FontAwesomeIcon icon={faHeart} onClick={() => handleLike()} style={{ color: isLiked ? 'red' : '#71767B', cursor: 'pointer' }} />
         {props.username === user.username && <FontAwesomeIcon icon={faTrashCan} onClick={() => handleDelete()} style={{ color: '#71767B', cursor: 'pointer' }} />}

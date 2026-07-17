@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { logout } from '../reducers/user';
 import LastTweets from './LastTweets';
+import Trends from './Trends';
 
 function Home() {
   const router = useRouter();
@@ -97,6 +98,7 @@ function Home() {
 
       <div className={styles.rightSection}>
         <h2>Trends</h2>
+        <Trends tweets={tweets} />
       </div>
 
     </div>

@@ -18,13 +18,12 @@ router.post("/", (req, res) => {
   } else {
     const newTweet = new Tweet({
       message: req.body.message,
-      hashtags: req.body.hashtags,
       username: req.body.username,
       date: new Date(),
       likes: [],
     });
 
-    newTweet.save().then((data) => {
+    newTweet.save().then(() => {
       res.json({ result: true });
     });
   }
@@ -48,5 +47,6 @@ router.put("/like", (req, res) => {
 router.delete("/delete", (req, res) => {
   Tweet.deleteOne({ _id: req.body._id }).then(() => res.json({ result: true }));
 });
+
 
 module.exports = router;
